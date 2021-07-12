@@ -1,0 +1,5 @@
+region_name: 'eu-west-2'
+key_name: 'ukca_keypair'
+ami_id: 'ami-09a56048b08f94cdf'
+instance_type: 't2.micro'
+instance_name: 'ukca_vm'
