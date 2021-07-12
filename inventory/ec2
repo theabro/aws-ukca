@@ -1,4 +1,2 @@
 [ukca_vm]
-18.130.169.251 ansible_user=ec2-user ansible_ssh_private_key_file=keys/ukca_keypair.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
-18.133.241.95 ansible_user=ec2-user ansible_ssh_private_key_file=keys/ukca_keypair.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 

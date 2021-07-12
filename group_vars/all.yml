@@ -1,0 +1,14 @@
+---
+username: ubuntu
+vagrant: vagrant
+
+# Define software versions
+FCM_VERSION: 2019.05.0
+CYLC_VERSION: 7.9.1
+ROSE_VERSION: 2019.01.3
+
+# GRIB API - mutually exclusive:
+# UMvn11.2+:            libeccodes-dev
+grib_library: libeccodes-dev
+# UMvn11.1 and earlier: libgrib-api-dev
+#grib_library: libgrib-api-dev

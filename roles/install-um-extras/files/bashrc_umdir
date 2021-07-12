@@ -1,0 +1,2 @@
+# Set UMDIR
+export UMDIR=/home/vagrant/umdir

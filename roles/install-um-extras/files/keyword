@@ -1,0 +1,17 @@
+location{primary}[um.xm] = https://code.metoffice.gov.uk/svn/um/main
+location{primary}[jules.xm] = https://code.metoffice.gov.uk/svn/jules/main
+location{primary}[socrates.xm] = https://code.metoffice.gov.uk/svn/socrates/main
+location{primary}[casim.xm] = https://code.metoffice.gov.uk/svn/monc/casim
+location{primary}[um_aux.xm] = https://code.metoffice.gov.uk/svn/um/aux
+location{primary}[um_doc.xm] = https://code.metoffice.gov.uk/svn/um/doc
+location{primary}[um_meta.xm] = https://code.metoffice.gov.uk/svn/um/meta
+location{primary}[mule.xm] = https://code.metoffice.gov.uk/svn/um/mule
+location{primary}[moci.xm] = https://code.metoffice.gov.uk/svn/moci/main
+location{primary}[shumlib.xm] = https://code.metoffice.gov.uk/svn/utils/shumlib
+location{primary}[um.offline] = file:///home/vagrant/source/um/offline
+location{primary}[jules.offline] = file:///home/vagrant/source/jules/offline
+location{primary}[socrates.offline] = file:///home/vagrant/source/socrates/offline
+location{primary}[casim.offline] = file:///home/vagrant/source/casim/offline
+location{primary}[um_aux.offline] = file:///home/vagrant/source/um_aux/offline
+location{primary}[mule.offline] = file:///home/vagrant/source/mule/offline
+location{primary}[shumlib.offline] = file:///home/vagrant/source/shumlib/offline

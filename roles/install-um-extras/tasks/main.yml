@@ -1,0 +1,100 @@
+#### Install UM additions
+
+- name: Install UM dependencies
+  apt:
+    pkg:
+    - mpich
+    - libnetcdf-dev
+    - libhdf5-serial-dev
+    - netcdf-bin
+    - libnetcdff-dev
+    - libnetcdff6
+    - python-numpy
+    - python-dev
+    - python-mock
+    - zenity 
+    - "{{ grib_library }}"
+    
+- name: Install LaTeX (long)
+  apt:
+    pkg:
+    - texlive
+    - texlive-latex-extra
+    - texlive-generic-extra
+    - texlive-science
+
+- name: Add mule requirement
+  lineinfile:
+    dest: /usr/lib/python2.7/dist-packages/mule.pth
+    line: "/home/vagrant/umdir/mule/lib"
+    create: yes
+
+- name: Update .profile with UMDIR/bin in PATH
+  blockinfile:
+    block: "{{ lookup('file', 'profile_umdir') }}"
+    path: /home/{{ username }}/.profile
+    marker: "# {mark} ANSIBLE MANAGED BLOCK UMDIR"
+
+- name: Update .bashrc with UMDIR
+  blockinfile:
+    block: "{{ lookup('file', 'bashrc_umdir') }}"
+    path: /home/{{ username }}/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK UMDIR"
+
+
+# Install Iris from miniconda - need particular versions of packages
+# to get tutorial scripts to work correctly
+- block: 
+    - name: create Downloads directory
+      file:
+        path: /home/{{ username }}/Downloads
+        state: directory
+    - name: Download Miniconda
+      get_url:
+        url: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+        dest: /home/{{ username }}/Downloads
+        mode: 0755
+    - name: Run miniconda script
+      shell: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
+      args:
+        executable: /bin/bash
+    - name: Install via conda
+      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c conda-forge python=3.6 iris=1.13 ipython mo_pack numpy=1.15
+      args:
+        executable: /bin/bash
+    - name: Update .bashrc with python specifics
+      blockinfile:
+        block: "{{ lookup('file', 'bashrc_python') }}"
+        path: /home/{{ username }}/.bashrc
+        marker: "# {mark} ANSIBLE MANAGED BLOCK CONDA"
+    - name: Remove Miniconda3-latest-Linux-x86_64.sh file
+      file:
+        path: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh
+        state: absent
+  become: yes
+  become_user: "{{ username }}"
+
+
+# Set up .metomi additions
+- block:
+    - name: create .metomi directory
+      file:
+        path: /home/{{ username }}/.metomi/fcm
+        state: directory
+    - name: Copy keyword.cfg file
+      copy:
+        src: keyword
+        dest: /home/{{ username }}/.metomi/fcm/keyword.cfg
+    - name: Set syntax highlighting in .bashrc
+      lineinfile:
+        dest: /home/{{ username }}/.metomi/rose.conf
+        create: yes
+        line: "{{ item }}"
+      with_items:
+        - "[rosie-id]"
+        - "prefix-username.u="
+        - ""
+        - "[rose-ana]"
+        - "kgo-database=.true."
+  become: yes
+  become_user: "{{ username }}"

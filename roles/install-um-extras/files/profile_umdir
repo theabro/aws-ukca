@@ -1,0 +1,4 @@
+# Include UMDIR/bin in PATH
+if [ -d "/home/vagrant/umdir/bin" ] ; then
+    PATH="/home/vagrant/umdir/bin:$PATH"
+fi

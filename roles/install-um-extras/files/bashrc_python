@@ -1,0 +1,2 @@
+alias pyterm="lxterminal -l -e 'export PATH=~/miniconda3/bin:\$PATH && bash'"
+alias pylab='ipython --pylab --logfile=ipython-`date +"%Y%m%d-%H%M%S"`.py'
