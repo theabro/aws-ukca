@@ -13,4 +13,17 @@ aws configure
 ```
 to set your IAM's `aws_access_key_id`, `aws_secret_access_key`, and default `region`. These are put in the `~/.aws/credentials` and `~/.aws/config` files.
 
-EC2 variables are set in `roles/create-ec2-instances/vars/main.yml`.
+This is a 2 stage process:
+
+1. Create the EC2 instance.
+2. Provision the EC2 instance with the required packages and settings to run FCM, Rose, & Cylc and prepare it for UM-UKCA use. 
+
+## Create the EC2 instance
+
+Change any settings as required to the EC2 variables that are set in `roles/create-ec2-instances/vars/main.yml` file.
+
+Run the command
+```
+ansible-playbook create-ec2.yml -i inventory
+```
+to create the EC2 instance. When this has completed the VM that has been created will be listed in the `inventory/ec2` file.
