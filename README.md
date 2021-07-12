@@ -3,8 +3,10 @@ Ansible playbook for running UKCA on an AWS EC2 instance
 
 Based on instructions from [Dave Sugden (April 2020)](https://davelms.medium.com/use-ansible-to-create-and-configure-ec2-instances-on-aws-cfbb0ed019bf) and [Vivek Gite (February 2018)](https://www.cyberciti.biz/faq/how-to-create-aws-ec2-key-using-ansible/)
 
-Tested on macOS 10.13.6
-
+Tested on macOS 10.13.6. On macOS you may first need to
+```
+export PATH="/Users/[YOUR USERNAME]/Library/Python/2.7/bin:$PATH"
+```
 Before you start, install the [AWS CLI](https://aws.amazon.com/cli/) and run the 
 ```
 aws configure
