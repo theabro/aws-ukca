@@ -1,11 +1,18 @@
-#- name: symlink /home/ubuntu to /home/vagrant
+- name: symlink /home/ubuntu to /home/vagrant
   file:
     src: /home/{{ username }}
     dest: /home/{{ vagrant }}
     state: link
     force: yes
 
-# Download and install Xconv into $UMDIR/bin
+# Make $UMDIR
+- name: make UMDIR
+  file:
+    path: /home/{{ vagrant }}/umdir
+    state: directory
+    mode: 0755
+
+# Make $UMDIR/bin
 - name: make UMDIR/bin
   file:
     path: /home/{{ vagrant }}/umdir/bin

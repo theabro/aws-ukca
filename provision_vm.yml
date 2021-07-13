@@ -1,27 +1,23 @@
 ---
 - hosts: ukca_vm
   remote_user: ubuntu
-  gather_facts: no
+  become: true
+  become_method: sudo
+  gather_facts: False
   pre_tasks:
     - name: install python2
       raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
-    - name: Gather facts
-      setup:
-
-
-
-
 
   roles:
   # configure the VM and download the metomi-vm files from github
-    - configure-os
-    - download-xconv
-    - install-base
-    - install-desktop
-    - install-um-extras
-    - install-mosrs
-    - remove-root-access
+    - role: configure-os
+    - role: download-xconv
+    - role: install-base
+    - role: install-desktop
+    - role: install-um-extras
+    - role: install-mosrs
+    - role: remove-root-access
 
 
   handlers:

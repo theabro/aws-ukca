@@ -20,11 +20,7 @@
 - name: download metomi-vm-files from github
   git:
     repo: https://github.com/metomi/metomi-vms.git
-    dest: /home/{{ vagrant }}/metomi-vms
+    dest: /home/{{ ubuntu }}/metomi-vms
     force: yes
   register: git_deploy
   until: git_deploy is success
-
-# Extend root volume using lvm to include a new physical disk
-#- include: create-data-vol.yml
-#  when: not local

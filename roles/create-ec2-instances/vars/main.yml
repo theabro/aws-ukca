@@ -3,3 +3,6 @@ key_name: 'ukca_keypair'
 ami_id: 'ami-09a56048b08f94cdf'
 instance_type: 't2.micro'
 instance_name: 'ukca_vm'
+volumes:
+  - device_name: /dev/sda1
+    volume_size: 30
