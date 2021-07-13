@@ -22,6 +22,8 @@ This is a 2 stage process:
 
 Change any settings as required to the EC2 variables that are set in `roles/create-ec2-instances/vars/main.yml` file.
 
+Rename the fine `inventory/ec2.example` to `inventory/ec2`. This file will contain a list of EC2 instances when they have been created.
+
 Run the command
 ```
 ansible-playbook create-ec2.yml -i inventory

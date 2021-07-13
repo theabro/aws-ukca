@@ -8,6 +8,12 @@
   environment:
     DEBIAN_FRONTEND: noninteractive
 
+- name: upgrade packages, long running process (~5mins)
+  apt:
+    upgrade: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
 - name: Install dos2unix in case any files have Windows EOL characters
   apt:
     name: dos2unix
@@ -20,7 +26,7 @@
 - name: download metomi-vm-files from github
   git:
     repo: https://github.com/metomi/metomi-vms.git
-    dest: /home/{{ ubuntu }}/metomi-vms
+    dest: /home/{{ username }}/metomi-vms
     force: yes
   register: git_deploy
   until: git_deploy is success

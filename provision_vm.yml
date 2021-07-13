@@ -1,6 +1,6 @@
 ---
 - hosts: ukca_vm
-  remote_user: ubuntu
+  remote_user: "{{ username }}"
   become: true
   become_method: sudo
   gather_facts: False
@@ -17,7 +17,7 @@
     - role: install-desktop
     - role: install-um-extras
     - role: install-mosrs
-    - role: remove-root-access
+    #- role: remove-root-access
 
 
   handlers:

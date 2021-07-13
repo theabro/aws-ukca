@@ -12,9 +12,9 @@
     - python-numpy
     - python-dev
     - python-mock
-    - zenity 
+    - zenity
     - "{{ grib_library }}"
-    
+
 - name: Install LaTeX (long)
   apt:
     pkg:
@@ -44,7 +44,7 @@
 
 # Install Iris from miniconda - need particular versions of packages
 # to get tutorial scripts to work correctly
-- block: 
+- block:
     - name: create Downloads directory
       file:
         path: /home/{{ username }}/Downloads
@@ -58,8 +58,8 @@
       shell: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
       args:
         executable: /bin/bash
-    - name: Install via conda
-      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c conda-forge python=3.6 iris=1.13 ipython mo_pack numpy=1.15
+    - name: Install via conda - very long process
+      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c conda-forge iris ipython
       args:
         executable: /bin/bash
     - name: Update .bashrc with python specifics

@@ -22,5 +22,5 @@
   local_action: lineinfile
                 path="inventory/ec2"
                 regexp={{ item.public_ip }}
-                insertafter="[ukca_vm]" line="{{ item.public_ip }} ansible_user={{ ubuntu }} ansible_ssh_private_key_file=keys/{{ key_name }}.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no'"
+                insertafter="[ukca_vm]" line="{{ item.public_ip }} ansible_user={{ username }} ansible_ssh_private_key_file=keys/{{ key_name }}.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no'"
   with_items: "{{ ec2.instances }}"

@@ -178,10 +178,11 @@
   register: command_result
   failed_when: "'FAILED' in command_result.stderr and '/srv/svn/roses-tmp' not in command_result.stderr"
 
-- command: htpasswd -b -c /srv/svn/auth.htpasswd {{ username }} {{ password }}
+- name: set username & password (same as username) for htpasswd
+  command: htpasswd -b -c /srv/svn/auth.htpasswd {{ username }} {{ username }}
 
 - block:
-    - shell: svn co -q --config-option config:auth:password-stores= --config-option=servers:global:store-plaintext-passwords=yes --password "{{ password }}" http://localhost/svn/roses-tmp
+    - shell: svn co -q --config-option config:auth:password-stores= --config-option=servers:global:store-plaintext-passwords=yes --password "{{ username }}" http://localhost/svn/roses-tmp
       args:
         executable: /bin/bash
         chdir: /home/{{ username }}
@@ -248,4 +249,3 @@
 - file:
     path: /home/{{ username }}/roses-tmp
     state: absent
-

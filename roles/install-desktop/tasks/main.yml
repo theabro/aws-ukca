@@ -21,7 +21,6 @@
         pkg:
         - x2goserver
         - x2goserver-xsession
-  when: not local
 
 # Install X11 to allow -X connections
 - block:
@@ -32,14 +31,14 @@
           - openbox
           - xauth
 
-    - name: Enabling X11 Forwarding  
+    - name: Enabling X11 Forwarding
       lineinfile:
         dest: /etc/ssh/sshd_config
         regexp: '^X11Forwarding'
         line: 'X11Forwarding yes'
       notify: Restart ssh
 
-    - name: Disable X11 localhost  
+    - name: Disable X11 localhost
       lineinfile:
         dest: /etc/ssh/sshd_config
         regexp: '^X11UseLocalhost'

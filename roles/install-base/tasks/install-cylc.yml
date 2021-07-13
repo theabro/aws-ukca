@@ -17,12 +17,14 @@
     - sqlite3
     - pep8
 
-#- name: Remove python-gobject
-#  apt:
-#    state: absent
-#    autoremove: yes
-#    pkg:
-#    - python-gobject
+# python-gi causes a crash in rosie go, and gobject v1 isn't needed
+- name: Remove python-gobject & python-gi
+  apt:
+    state: absent
+    autoremove: yes
+   pkg:
+    - python-gi
+    - python-gobject
 
 - name: install make
   apt:

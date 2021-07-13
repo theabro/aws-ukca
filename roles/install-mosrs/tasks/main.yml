@@ -35,7 +35,7 @@
   args:
     chdir: /home/{{ username }}/gnupg-2.0.30
 
-- name: make gnupg-2.0.30
+- name: make gnupg-2.0.30 (long)
   make:
     chdir: /home/{{ username }}/gnupg-2.0.30
 

@@ -1,5 +1,3 @@
-
-
 - include: install-editor.yml
 - include: install-FCM.yml
 - include: install-cylc.yml
