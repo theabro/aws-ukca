@@ -1,6 +1,5 @@
 ---
 username: ubuntu
-password: ""
 vagrant: vagrant
 
 # Define software versions

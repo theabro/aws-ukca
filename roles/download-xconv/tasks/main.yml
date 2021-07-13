@@ -11,6 +11,7 @@
     path: /home/{{ vagrant }}/umdir
     state: directory
     mode: 0755
+    owner: "{{ username }}"
 
 # Make $UMDIR/bin
 - name: make UMDIR/bin
@@ -18,12 +19,14 @@
     path: /home/{{ vagrant }}/umdir/bin
     state: directory
     mode: 0755
+    owner: "{{ username }}"
 
 - name: Download & install Xconv to UMDIR/bin
   unarchive:
     src: http://cms.ncas.ac.uk/documents/xconv/_downloads/xconv1.94_linux_x86_64.tar.gz
     dest: /home/{{ vagrant }}/umdir/bin
     remote_src: yes
+    owner: "{{ username }}"
 
 - name: link xconv1.94 to xconv
   file:
@@ -31,6 +34,7 @@
     dest: /home/{{ vagrant }}/umdir/bin/xconv
     state: link
     force: yes
+    owner: "{{ username }}"
 
 - name: link xconv1.94 to convsh
   file:
@@ -38,3 +42,5 @@
     dest: /home/{{ vagrant }}/umdir/bin/convsh
     state: link
     force: yes
+    owner: "{{ username }}"
+    
