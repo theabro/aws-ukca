@@ -18,13 +18,23 @@
     - pep8
 
 # python-gi causes a crash in rosie go, and gobject v1 isn't needed
-- name: Remove python-gobject & python-gi
+- name: Remove python-gobject
   apt:
-    state: absent
+    update_cache: yes
+    purge: yes
+    force: yes
     autoremove: yes
-   pkg:
-    - python-gi
-    - python-gobject
+    state: absent
+    name: python-gobject
+
+- name: Remove python-gi
+  apt:
+    update_cache: yes
+    purge: yes
+    force: yes
+    autoremove: yes
+    state: absent
+    name: python-gi
 
 - name: install make
   apt:
