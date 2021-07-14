@@ -43,7 +43,7 @@ The EC2 instance is created with 30GB of Elastic Block Store (EBS) disk for the 
 
 Once the EC2 instance has been created, you can provision the Met Office VM on it by running the command
 
-	ansible-playbook -v provision.yml -i inventory
+	ansible-playbook -v provision_vm.yml -i inventory
 
 This will take the information of the EC2 instance created from the file `inventory/ec2`. If you terminate this instance or if its IP address changes you will need to update this file.
 
