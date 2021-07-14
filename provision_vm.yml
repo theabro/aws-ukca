@@ -17,7 +17,6 @@
     - role: install-desktop
     - role: install-um-extras
     - role: install-mosrs
-    #- role: remove-root-access
 
 
   handlers:
