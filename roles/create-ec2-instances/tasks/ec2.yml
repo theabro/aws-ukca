@@ -10,10 +10,8 @@
     wait: yes
     instance_tags:
       Name: ukca_vm
-      Env: sandbox
     count_tag:
       Name: ukca_vm
-      Env: sandbox
     exact_count: 1
     assign_public_ip: yes
   register: ec2
