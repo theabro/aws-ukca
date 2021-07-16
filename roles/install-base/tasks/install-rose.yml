@@ -59,11 +59,13 @@
       dest: "{{ item }}"
       state: directory
       owner: "{{ username }}"
+      group: "{{ username }}"
     with_items:
       - /home/{{ username }}/.local/share/gtksourceview-3.0/language-specs
       - /home/{{ username }}/.vim/syntax
       - /home/{{ username }}/.emacs.d/lisp
     become: yes
+    become_user: "{{ username }}"
     ignore_errors: yes
 
   - command: dos2unix -n /home/{{ vagrant }}/metomi-vms/home/{{ item }} /home/{{ username }}/{{ item }}
@@ -92,7 +94,6 @@
       - { src: rose-conf.lang , dest: .local/share/gtksourceview-3.0/language-specs }
       - { src: rose-conf.vim , dest: .vim/syntax }
       - { src: rose-conf-mode.el , dest: .emacs.d/lisp }
-
   become: yes
   become_user: "{{ username }}"
 
@@ -111,6 +112,8 @@
     path: /home/{{ username }}/.local/share/applications
     state: directory
     owner: "{{ username }}"
+    group: "{{ username }}"
+  become_user: "{{ username }}"
 
 - copy:
     src: mimeapps.list

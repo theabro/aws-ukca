@@ -23,6 +23,8 @@
     name: gpg-agent
     state: absent
     autoremove: yes
+    purge: yes
+    force: yes
 
 - name: download gpg
   unarchive:

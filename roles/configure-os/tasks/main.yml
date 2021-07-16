@@ -30,3 +30,5 @@
     force: yes
   register: git_deploy
   until: git_deploy is success
+  become: yes
+  become_user: "{{ username }}"
