@@ -58,16 +58,12 @@
       shell: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
       args:
         executable: /bin/bash
-    - name: Install iris via conda (very long)
-      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c conda-forge iris ipython
+    - name: Install mamba via conda (long)
+      shell: PATH=~/miniconda3/bin:$PATH conda install mamba -n base -c conda-forge -y
       args:
         executable: /bin/bash
-    - name: Install cf via conda (long)
-      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c ncas -c conda-forge cf-python cf-plot udunits2
-      args:
-        executable: /bin/bash
-    - name: Install cf extras via conda (long)
-      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c conda-forge mpich esmpy
+    - name: Install cf & iris via mamba (very long)
+      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 mpich esmpy iris ipython -c ncas -c conda-forge -y
       args:
         executable: /bin/bash
     - name: Update .bashrc with python specifics
