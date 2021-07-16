@@ -8,16 +8,35 @@ Tested on macOS 10.13.6. On macOS you may first need to
 
 	export PATH="/Users/[YOUR USERNAME]/Library/Python/2.7/bin:$PATH"
 
-Before you start, install the [AWS CLI](https://aws.amazon.com/cli/) and run the 
+This is a 3 stage process:
+
+1. Create a user on the AWS Console
+2. Create the EC2 instance.
+3. Provision the EC2 instance with the required packages and settings to run FCM, Rose, & Cylc and prepare it for UM-UKCA use. 
+
+### Chose your region
+
+On the [AWS console](https://aws.amazon.com/) you should choose the region where you want the VM to be provisioned. You can find the list of regions by using the drop-down menu on the top right of the page. The defualt settings may put you in `us-east-2` (US East (Ohio)), but you may want to change this to, e.g., London (or `eu-west-2`). 
+
+There are many different types of EC2 VMs (e.g. Ubuntu, Amazon Linux etc.), which are identified by their unique **ami-** identifier. This identifier is also unique to a particular region. The setting for Ubuntu 18.04 LTS in the London (`eu-west-2`) region has already been selected in the `roles/create-ec2-instances/vars/main.yml` file. If you wish to use a different region you will need to search for the correct _ami-_ identifier from the **Launch instance** option within the EC2 Dashboard and then set this in the Vagrantfile accordingly.
+
+### Create a user
+
+You will need to create a user with the correct permissions to access your EC2 VM, which again is done via the [AWS console](https://aws.amazon.com/). This done within the **IAM Dashboard** (Identity and Access Management). On the console front page click the **All services** drop-down menu, and then click **IAM** under the "Security, Identity, & Compliance" section.
+
+Under **Access Management** click **Users** and then click **Add user**. You should give them a name, e.g. _ukca_ etc.. Tick the box for **Programmatic access** and then click the **Next: Permissions** button.
+
+Here you should click the tab labelled **Attach existing policies directly** and search for **AmazonEC2FullAccess** and then tick the check-box next to this option. Now click the **Next: Tags** button. You can then click the **Next: Review** button. 
+
+Now click **Create user**. This will bring you to a page listing the username, the _Access key ID_ and the _Secret access key_. **THE SECRET ACCESS KEY INFORMATION WILL BE DISPLAYED ONLY ONCE**. 
+
+You should download and save the `.csv` file containing this information. Again, do not upload this information to a public repository.
+
+Before you create your EC2 instance you should install the [AWS CLI](https://aws.amazon.com/cli/) and run the 
 
 	aws configure
 
-to set your IAM's `aws_access_key_id`, `aws_secret_access_key`, and default `region`. These are put in the `~/.aws/credentials` and `~/.aws/config` files.
-
-This is a 2 stage process:
-
-1. Create the EC2 instance.
-2. Provision the EC2 instance with the required packages and settings to run FCM, Rose, & Cylc and prepare it for UM-UKCA use. 
+to set your IAM's `aws_access_key_id`, `aws_secret_access_key`, and default `region` (e.g. `eu-west-2` for London). These are put in the `~/.aws/credentials` and `~/.aws/config` files.
 
 ## Create the EC2 instance
 
