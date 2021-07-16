@@ -67,7 +67,7 @@
       args:
         executable: /bin/bash
     - name: Install cf extras via conda (long)
-      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c ncas -c conda-forge mpich esmpy
+      shell: PATH=~/miniconda3/bin:$PATH conda install -y -c conda-forge mpich esmpy
       args:
         executable: /bin/bash
     - name: Update .bashrc with python specifics
