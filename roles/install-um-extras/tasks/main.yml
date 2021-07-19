@@ -62,8 +62,9 @@
       shell: PATH=~/miniconda3/bin:$PATH conda install mamba -n base -c conda-forge -y
       args:
         executable: /bin/bash
-    - name: Install cf & iris via mamba (very long)
-      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 mpich esmpy iris ipython -c ncas -c conda-forge -y
+    - name: Install iris via mamba (very long)
+      #shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 mpich esmpy iris mo_pack ipython cftime==1.2.1 -c ncas -c conda-forge -y
+      shell: PATH=~/miniconda3/bin:$PATH mamba install iris mo_pack ipython -c conda-forge -y
       args:
         executable: /bin/bash
     - name: Update .bashrc with python specifics
