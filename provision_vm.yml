@@ -15,7 +15,6 @@
     - role: install-base
     - role: install-desktop
     - role: install-um-extras
-    - role: remove-packages
     - role: install-mosrs
 
   handlers:

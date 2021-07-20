@@ -1,3 +1,16 @@
+---
+
+### python-gi causes a crash in rosie go
+
+- name: Remove python-gi
+  apt:
+    name: python-gi
+    update_cache: yes
+    autoremove: yes
+    purge: yes
+    force: yes
+    state: absent
+
 #### Install and configure gpg-agent
 
 - name: Install gpg-agent dependencies 1/3
