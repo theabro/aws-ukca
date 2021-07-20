@@ -10,14 +10,13 @@
 
 
   roles:
-  # configure the VM and download the metomi-vm files from github
     - role: configure-os
     - role: download-xconv
     - role: install-base
     - role: install-desktop
     - role: install-um-extras
     - role: install-mosrs
-
+    #- role: remove-packages
 
   handlers:
   - name: Restart ssh

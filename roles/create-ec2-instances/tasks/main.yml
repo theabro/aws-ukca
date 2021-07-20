@@ -1,6 +1,6 @@
 ---
 # tasks file for create-ec2-instances
-- name: Create ukca_vm in default VPC
+- name: Create instance in default VPC
   block:
     - import_tasks: key-pair.yml
     - import_tasks: network-information.yml
