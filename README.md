@@ -128,3 +128,8 @@ must be made in `group_vars/all.yml` (this is the default). The current roles wi
 After the `um-setup` command you will need to close and re-open a terminal.
 
 Availble suites for the VM can be found on the [UKCA Website](https://www.ukca.ac.uk/wiki/index.php/GA7.1_StratTrop_suites#Virtual_Machine_Development_Suites).
+
+To remove the existing MOSRS information, you need to delete the following file:
+
+    rm .subversion/auth/svn.simple/2be6a67d04b1c8c6d879daafa52fd762
+
