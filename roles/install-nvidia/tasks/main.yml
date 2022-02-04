@@ -1,4 +1,10 @@
 
+# install required packages for using the NVIDIA compiler with the UM
+- name: install environment-modules
+  apt:
+    name: environment-modules
+    register: envmod
+
 # https://developer.nvidia.com/nvidia-hpc-sdk-downloads - need to accept licence agreement
 - name: Install v22.1 SDK
   apt:
@@ -21,12 +27,16 @@
 
 - name: Install zlib
     become: yes
-    shell: "module load nvhpc ; ./configure --prefix=${ZDIR}"
+    shell: "{{ item }}"
     environment:
-        ZDIR: /home/vagrant/umdir/nvidia
+        IDIR: /home/vagrant/umdir/nvidia
         CC: gcc
         FC: nvfortran
     args:
        chdir: "/home/{{ username }}/Downloads/{{ zlib_dir.files[0] }}"
-    when: (zlib_dir|changed) and (umdir|changed) and (nvidia|changed)
+    with_items:
+      - "module load nvhpc ; ./configure --prefix=${IDIR}"
+      - "module load nvhpc ; make"
+      - make install
+    when: (zlib_dir|changed) and (umdir|changed) and (nvidia|changed) and (envmod|changed)
     register: zlib
