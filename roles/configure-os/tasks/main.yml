@@ -22,6 +22,14 @@
   apt:
     name: git
 
+- name: install environment-modules
+  apt:
+    name: environment-modules
+
+- name: install ec2-instance-connect
+  apt:
+    name: ec2-instance-connect
+
 # Download metomivms data from github
 - name: download metomi-vm-files from github
   git:

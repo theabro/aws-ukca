@@ -9,6 +9,7 @@
     - netcdf-bin
     - libnetcdff-dev
     - libnetcdff6
+    - libnuma-dev
     - python-numpy
     - python-dev
     - python-mock
@@ -40,20 +41,18 @@
     block: "{{ lookup('file', 'bashrc_umdir') }}"
     path: /home/{{ username }}/.bashrc
     marker: "# {mark} ANSIBLE MANAGED BLOCK UMDIR"
+    register: umdir
 
 
 # Install Iris from miniconda - need particular versions of packages
 # to get tutorial scripts to work correctly
 - block:
-    - name: create Downloads directory
-      file:
-        path: /home/{{ username }}/Downloads
-        state: directory
     - name: Download Miniconda
       get_url:
         url: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
         dest: /home/{{ username }}/Downloads
         mode: 0755
+        when: downdir|changed # can only do once Downloads directory has been created
     - name: Run miniconda script
       shell: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
       args:

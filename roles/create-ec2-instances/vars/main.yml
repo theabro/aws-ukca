@@ -1,11 +1,12 @@
 region_name: 'eu-west-2'
 key_name: 'ukca_keypair'
 ami_id: 'ami-09a56048b08f94cdf' # Ubuntu 18.04 64-bit CPU in eu-west-2
-instance_type: 't2.micro' # 1xCPU/1xGB memory
-instance_name: 'ukca_vm'
+#instance_type: 't2.micro' # 1xCPU/1xGB memory
+instance_type: 'g4dn.xlarge' # 1xGPU/4xCPU/16xGB memory NOT FREE TIER
+instance_name: 'ukca_vm_gpu'
 volumes:
   - device_name: /dev/sda1
-    volume_size: 30 # 30GB disk
+    volume_size: 50 # 50GB disk
     # remove volume when EC2 instance terminated - if not included
     # volume will persist and need to be deleted manually
     delete_on_termination: yes

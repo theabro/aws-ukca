@@ -149,3 +149,10 @@
         dest: /home/{{ username }}/.config/pcmanfm/LXDE/desktop-items-0.conf
   become: yes
   become_user: "{{ username }}"
+
+# create the Downloads directory used by lots of things.
+- name: create Downloads directory
+  file:
+    path: /home/{{ username }}/Downloads
+    state: directory
+    register: downdir

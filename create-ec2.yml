@@ -1,4 +1,4 @@
-# Create ukca_vm on an EC2 instance
+# Create ukca_vm_gpu on an EC2 instance
 - hosts: local
   gather_facts: False
   roles:

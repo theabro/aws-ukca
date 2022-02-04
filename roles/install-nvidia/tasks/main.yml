@@ -1,0 +1,32 @@
+
+# https://developer.nvidia.com/nvidia-hpc-sdk-downloads - need to accept licence agreement
+- name: Install v22.1 SDK
+  apt:
+    deb: https://developer.download.nvidia.com/hpc-sdk/22.1/nvhpc-22-1_22.1_amd64.deb
+    deb: https://developer.download.nvidia.com/hpc-sdk/22.1/nvhpc-2022_22.1_amd64.deb
+  register: nvidia
+
+# need to enable use of nvhpc modules in .bashrc
+# STILL TO DO
+
+# download, compile, and install zlib using nvidia compilers
+- name: zlib v1.2.11 installation
+    become: yes
+    unarchive:
+       src: https://github.com/madler/zlib/archive/refs/tags/v1.2.11.tar.gz
+       dest: /home/{{ username }}/Downloads
+      remote_src: yes
+    when: downdir|changed
+    register: zlib_dir
+
+- name: Install zlib
+    become: yes
+    shell: "module load nvhpc ; ./configure --prefix=${ZDIR}"
+    environment:
+        ZDIR: /home/vagrant/umdir/nvidia
+        CC: gcc
+        FC: nvfortran
+    args:
+       chdir: "/home/{{ username }}/Downloads/{{ zlib_dir.files[0] }}"
+    when: (zlib_dir|changed) and (umdir|changed) and (nvidia|changed)
+    register: zlib

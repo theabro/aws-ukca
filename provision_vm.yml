@@ -1,5 +1,5 @@
 ---
-- hosts: ukca_vm
+- hosts: ukca_vm_gpu
   remote_user: "{{ username }}"
   become: true
   become_method: sudo
