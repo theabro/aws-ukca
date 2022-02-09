@@ -9,7 +9,6 @@
     - netcdf-bin
     - libnetcdff-dev
     - libnetcdff6
-    - libnuma-dev
     - python-numpy
     - python-dev
     - python-mock

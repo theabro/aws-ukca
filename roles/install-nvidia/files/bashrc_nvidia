@@ -1,0 +1,4 @@
+# load nvhpc modules if available
+if [[ -d /opt/nvidia/hpc_sdk/modulefiles ]]; then
+        export MODULEPATH=$MODULEPATH:/opt/nvidia/hpc_sdk/modulefiles
+fi

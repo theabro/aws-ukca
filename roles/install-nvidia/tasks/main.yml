@@ -1,42 +1,29 @@
+# INSTALL NECESSARY ADDITIONS FOR USING THE NVIDIA HPC SDK WITH THE UM
 
-# install required packages for using the NVIDIA compiler with the UM
-- name: install environment-modules
+# install packages for using the NVIDIA compiler with the UM and to be able to compile the UM with NVIDIA
+# also install the NVIDIA driver (which also provides nvidi-smi) to allow the user to access the graphics card
+- name: install additional required packages for NVIDIA
   apt:
-    name: environment-modules
-    register: envmod
+    pkg: 
+    - environment-modules
+    - libnuma-dev
+    - nvidia-driver-495
 
-# https://developer.nvidia.com/nvidia-hpc-sdk-downloads - need to accept licence agreement
-- name: Install v22.1 SDK
+# install pre-made .deb file for the netcdf4 libraries built using NVHPC SDK v22.1
+- name: Install netCDF4 pre-build using NVIDIA HPC SDK v22.1
   apt:
-    deb: https://developer.download.nvidia.com/hpc-sdk/22.1/nvhpc-22-1_22.1_amd64.deb
-    deb: https://developer.download.nvidia.com/hpc-sdk/22.1/nvhpc-2022_22.1_amd64.deb
-  register: nvidia
+    deb: https://gws-access.jasmin.ac.uk/public/ukca/nvidia-netcdf_4.5.4-1_amd64.deb
 
 # need to enable use of nvhpc modules in .bashrc
-# STILL TO DO
+# will only work once the NVHPC modules are available for use
+- name: Update .bashrc with modulefile
+  blockinfile:
+    block: "{{ lookup('file', 'bashrc_nvidia') }}"
+    path: /home/{{ username }}/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK NVIDIA"
 
-# download, compile, and install zlib using nvidia compilers
-- name: zlib v1.2.11 installation
-    become: yes
-    unarchive:
-       src: https://github.com/madler/zlib/archive/refs/tags/v1.2.11.tar.gz
-       dest: /home/{{ username }}/Downloads
-      remote_src: yes
-    when: downdir|changed
-    register: zlib_dir
-
-- name: Install zlib
-    become: yes
-    shell: "{{ item }}"
-    environment:
-        IDIR: /home/vagrant/umdir/nvidia
-        CC: gcc
-        FC: nvfortran
-    args:
-       chdir: "/home/{{ username }}/Downloads/{{ zlib_dir.files[0] }}"
-    with_items:
-      - "module load nvhpc ; ./configure --prefix=${IDIR}"
-      - "module load nvhpc ; make"
-      - make install
-    when: (zlib_dir|changed) and (umdir|changed) and (nvidia|changed) and (envmod|changed)
-    register: zlib
+# The user will need to install the NVHPC .deb files from here
+# https://developer.nvidia.com/nvidia-hpc-sdk-downloads 
+# as they will need to manually accept licence agreement prior to download
+# It is recommended to use version 22.1 as this has been tested with the UM, GCOM, & SHUMLIB
+# and was used to compile up the netCDF4 libraries used in the .deb file above
