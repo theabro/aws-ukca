@@ -132,4 +132,3 @@ Availble suites for the VM can be found on the [UKCA Website](https://www.ukca.a
 To remove the existing MOSRS information, you need to delete the following file:
 
     rm .subversion/auth/svn.simple/2be6a67d04b1c8c6d879daafa52fd762
-
