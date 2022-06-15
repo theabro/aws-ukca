@@ -22,6 +22,14 @@
   apt:
     name: git
 
+#### Install additional packages, inc. ec2-instance-connect
+- name: Install packages
+  apt:
+    pkg:
+    - ec2-instance-connect
+    - gnuplot
+    - python3-pip
+
 # Download metomivms data from github
 - name: download metomi-vm-files from github
   git:

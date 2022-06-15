@@ -4,9 +4,9 @@ Ansible playbook for running UKCA on an AWS EC2 instance. This is based on the V
 
 Based on instructions from [Dave Sugden (April 2020)](https://davelms.medium.com/use-ansible-to-create-and-configure-ec2-instances-on-aws-cfbb0ed019bf) and [Vivek Gite (February 2018)](https://www.cyberciti.biz/faq/how-to-create-aws-ec2-key-using-ansible/), as well as general Googling.
 
-Tested on macOS 10.13.6. On macOS you may first need to
+Tested on macOS 12.3.1. On macOS you may first need to
 
-	export PATH="/Users/[YOUR USERNAME]/Library/Python/2.7/bin:$PATH"
+	export PATH="/Users/[YOUR USERNAME]/Library/Python/3.8/bin:$PATH"
 
 This is a 3 stage process:
 
@@ -107,6 +107,8 @@ If you stop the instance and then later restart it, the IP address may change. Y
 | Session type | *Select* LXDE *from drop-down menu* |
 
 ### UM Install Commands
+
+Once your VM is provisioned you will need to stop it via the AWS web console and change its instance type to at least a **t2.large** to provide enough vCPUs and memory to run UKCA. Large and more powerful instance types are also available.
 
 **Note** that prior to UMvn11.1 the UM install won't work due to the `gfortran` compiler version used at Ubuntu 18.04. Post vn11.2 the setting 
 
