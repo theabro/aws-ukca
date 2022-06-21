@@ -163,9 +163,9 @@ To create the network the EC2 instances will reside in, the file [UKCACloudForma
 
 You will need the **AMI ID** from the image you created above and enter this in the `ami=` line in the [create-ec2.sh](src/create-ec2.sh) script.
 
-Whether keys and instances are created or not will depend on whether or not a `keys/ukca_key_trXX.pem` (for keys) and a `keys/ukca_vm_tr01.json` (for instances) exists. If both files exist for e.g. `XX=01` and 2 instances are requested to be created, in fact only the second one will be provision as the script assumes that the first already exists. If the `.pem` file exists and the `.json` file does not then the key will **not** be created but the instance will be (and vice versa). 
+Whether keys and instances are created or not will depend on whether or not a `keys/ukca_key_trXX.pem` (for keys) and a `keys/ukca_vm_trXX.json` (for instances) exists. If both files exist for e.g. `XX=01` and 2 instances are requested to be created, in fact only the second one will be provision as the script assumes that the first already exists. If the `.pem` file exists and the `.json` file does not then the key will **not** be created but the instance will be (and vice versa). 
 
-It is therefore important to remember to delete any `ukca_key_trXX.pem` and `ukca_vm_tr01.json` files in the `keys/` directory, terminate any previous instances, and remove the corresponding keys from the AWS web console before creating new keys and instances, as they will not be created unless the corresponding files have been removed.
+It is therefore important to remember to delete any `ukca_key_trXX.pem` and `ukca_vm_trXX.json` files in the `keys/` directory, terminate any previous instances, and remove the corresponding keys from the AWS web console before creating new keys and instances, as they will not be created unless the corresponding files have been removed.
 
 **Note** here **NOT** to delete the `ukca_keypair.pem` file that is the key for the instance provisioned using the Ansible method described above.
 
