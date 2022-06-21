@@ -2,6 +2,9 @@
 
 Ansible playbooks and AWS scripts for creating UKCA training VMs on an AWS EC2 instance. This is based on the Vagrant-based [Met Office Virtual Machine](https://github.com/metomi/metomi-vms) and previous work on using Ansible for this VM on the [JASMIN Unmanaged Cloud](https://github.com/theabro/ukca-playbook). 
 
+The UKCA Tutorials, including information on how to connect to the VMs, can be found here:
+* https://www.ukca.ac.uk/wiki/index.php/UKCA_Chemistry_and_Aerosol_Tutorials_at_vn11.8 
+
 Based on instructions from [Dave Sugden (April 2020)](https://davelms.medium.com/use-ansible-to-create-and-configure-ec2-instances-on-aws-cfbb0ed019bf) and [Vivek Gite (February 2018)](https://www.cyberciti.biz/faq/how-to-create-aws-ec2-key-using-ansible/), as well as general Googling. Many thanks to Courtney Waugh of AWS for help and advice with the AWS scripts.
 
 Tested on macOS 12.3.1. On macOS you may first need to
@@ -180,7 +183,9 @@ into the [create-ec2.sh](src/create-ec2.sh) script then `cd` into the `src/` dir
 
     bash create-ec2.sh N 
 
-where `N` is the number of instances you want to create. This will then create corresponding files, `ukca_tr_XX.pem` and `ukca_vm_trXX.json`, in the `keys/` directory. You should specify both subnets and the script will distribute the instances between both of them.
+where `N` is the number of instances you want to create. This will then create corresponding files, `ukca_tr_XX.pem` and `ukca_vm_trXX.json`, in the `keys/` directory. You should specify both subnets and the script will distribute the instances between both of them. You may want to zip the key files up prior to distributing them, e.g.
+
+    zip ukca_key_tr01.zip ukca_key_tr01.pem
 
 However, the information in the .json files will not include the public IP address information at this time as these won't have been assigned. Once the EC2 instances have all started and are running, you can use the script [get-ec2-ip.sh](src/get-ec2-ip.sh) to return the IP address information, e.g.
 
