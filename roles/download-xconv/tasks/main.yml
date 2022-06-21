@@ -26,7 +26,7 @@
 
 - name: Download & install Xconv to UMDIR/bin
   unarchive:
-    src: http://cms.ncas.ac.uk/documents/xconv/_downloads/xconv1.94_linux_x86_64.tar.gz
+    src: https://gws-access.jasmin.ac.uk/public/ukca/xconv1.94_linux_x86_64.tar.gz
     dest: /home/{{ vagrant }}/umdir/bin
     remote_src: yes
   become: yes
