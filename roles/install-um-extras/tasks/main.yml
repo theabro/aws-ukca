@@ -58,7 +58,7 @@
       shell: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
       args:
         executable: /bin/bash
-    - name: Update conda base (long)
+    - name: Update conda base
       shell: PATH=~/miniconda3/bin:$PATH conda update -n base -c defaults conda -y
       args:
         executable: /bin/bash
@@ -67,7 +67,7 @@
       args:
         executable: /bin/bash
     - name: Install python packages via mamba (very long)
-      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 cartopy mpich esmpy iris mo_pack ipython jupyter -c conda-forge -y
+      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 cartopy cfdm=1.9.0.3 mpich esmpy iris mo_pack ipython jupyter -c conda-forge -y
       #shell: PATH=~/miniconda3/bin:$PATH mamba install iris mo_pack ipython -c conda-forge -y
       args:
         executable: /bin/bash
