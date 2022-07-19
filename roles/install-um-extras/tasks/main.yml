@@ -58,13 +58,21 @@
       shell: /home/{{ username }}/Downloads/Miniconda3-latest-Linux-x86_64.sh -b
       args:
         executable: /bin/bash
+    - name: Update conda base (long)
+      shell: PATH=~/miniconda3/bin:$PATH conda update -n base -c defaults conda -y
+      args:
+        executable: /bin/bash
     - name: Install mamba via conda (long)
       shell: PATH=~/miniconda3/bin:$PATH conda install mamba -n base -c conda-forge -y
       args:
         executable: /bin/bash
-    - name: Install iris via mamba (very long)
-      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 mpich esmpy iris mo_pack ipython -c ncas -c conda-forge -y
+    - name: Install python packages via mamba (very long)
+      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python cf-plot udunits2 cartopy mpich esmpy iris mo_pack ipython jupyter -c conda-forge -y
       #shell: PATH=~/miniconda3/bin:$PATH mamba install iris mo_pack ipython -c conda-forge -y
+      args:
+        executable: /bin/bash
+    - name: Install cfview via pip
+      shell: PATH=~/miniconda3/bin:$PATH pip install cf-view
       args:
         executable: /bin/bash
     - name: Update .bashrc with python specifics
