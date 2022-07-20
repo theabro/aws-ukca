@@ -75,6 +75,14 @@
       shell: PATH=~/miniconda3/bin:$PATH pip install cf-view
       args:
         executable: /bin/bash
+    - name: Build the UM file reading routines
+      make:
+        chdir: /home/ubuntu/miniconda3/lib/python3.9/site-packages/cf/umread_lib/c-lib
+    - name: Comment out the self.setGeometry declaration to allow cfview to have resizable windows
+      ansible.builtin.replace:
+        path: /home/ubuntu/miniconda3/bin/cfview
+        regexp: '^self.setGeometry$'
+        replace: '\1#self.setGeometry\2'
     - name: Update .bashrc with python specifics
       blockinfile:
         block: "{{ lookup('file', 'bashrc_python') }}"
