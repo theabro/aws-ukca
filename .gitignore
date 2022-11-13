@@ -3,3 +3,4 @@ keys
 inventory/ec2
 new_user_credentials.csv
 .vscode
+*~

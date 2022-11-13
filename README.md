@@ -10,6 +10,7 @@ Based on instructions from [Dave Sugden (April 2020)](https://davelms.medium.com
 Tested on macOS 12.3.1. On macOS you may first need to
 
 	export PATH="/Users/[YOUR USERNAME]/Library/Python/3.8/bin:$PATH"
+	export PYTHONPATH="/Users/[YOUR USERNAME]/Library/Python/3.8/lib/python/site-packages:$PYTHONPATH"
 
 This is a 5 stage process:
 
@@ -121,16 +122,18 @@ Once your VM is provisioned you will need to stop it via the AWS web console and
 
 must be made in `group_vars/all.yml` (this is the default). The current roles will perform the equivalent to `sudo install-um-extras`, but following that you will need to run the following commands in sequence (e.g. for vn11.8):
 
-    um-setup -s fcm:shumlib.x_tr@um11.8
-    install-um-data
-    install-ukca-data
+    um-setup -s fcm:shumlib.x_tr@um13.0
+    install-um-data 
+    install-ukca-data 
     install-rose-meta
-    fcm checkout fcm:um.x_tr@vn11.8 UM11.8
-    cd UM11.8
-    rose stem --group=install,install_source -S CENTRAL_INSTALL=true -S UKCA=true
-    rose stem --group=fcm_make --name=vn11.8_prebuilds -S MAKE_PREBUILDS=true
-    rose stem -O offline --group=fcm_make --name=vn11.8_offline_prebuilds -S MAKE_PREBUILDS=true
-    rose stem --group=kgo,ukca -S GENERATE_KGO=true
+    fcm checkout fcm:um.x_tr@vn13.0 UM13.0
+    fcm checkout fcm:ukca.x_tr@um13.0 UKCAum13.0
+    cd UM13.0/
+    rose stem --group=install,install_source --source=. --source=fcm:ukca.xm_tr@um13.0 -S CENTRAL_INSTALL=true -S UKCA=true
+    rose stem --group=fcm_make --source=. --source=fcm:ukca.xm_tr@um13.0 -S MAKE_PREBUILDS=true --name=vn13.0_prebuilds
+    rose stem --group=fcm_make --source=. --source=fcm:ukca.xm_tr@um13.0 -S MAKE_PREBUILDS=true --name=vn13.0_prebuilds -S LIMIT=8
+    rose stem -O offline --group=fcm_make --source=. --source=fcm:ukca.xm_tr@um13.0 -S MAKE_PREBUILDS=true --name=vn13.0_offline_prebuilds -S LIMIT=8
+    rose stem --group=kgo,ukca --source=. --source=fcm:ukca.xm_tr@um13.0 -S GENERATE_KGO=true -S LIMIT=8
 
 After the `um-setup` command you will need to close and re-open a terminal.
 

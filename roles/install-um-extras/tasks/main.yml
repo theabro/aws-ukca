@@ -67,7 +67,7 @@
       args:
         executable: /bin/bash
     - name: Install python packages via mamba (very long)
-      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python==3.13.1 cf-plot==3.1.26 udunits2 cartopy==0.20.0 cfdm=1.9.0.4 mpich esmpy iris mo_pack cf-units==3.0 cftime==1.5.1.1 matplotlib==3.5.2 nc-time-axis ipython jupyter -c conda-forge -y
+      shell: PATH=~/miniconda3/bin:$PATH mamba install cf-python==3.13.1 cf-plot==3.1.26 udunits2 cartopy==0.20.0 cfdm=1.9.0.4 mpich esmpy iris mo_pack cf-units==3.1.1 cftime==1.6.2 matplotlib==3.5.2 nc-time-axis ipython jupyter jupyterlab -c conda-forge -y
       #shell: PATH=~/miniconda3/bin:$PATH mamba install iris mo_pack ipython -c conda-forge -y
       args:
         executable: /bin/bash
