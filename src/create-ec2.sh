@@ -25,9 +25,10 @@ subnet1='subnet-XXXXXXXXXXX'
 #   required documentation/output, & ec2 instance connect included. Version 1.2, 2022-03-02.
 # This now has a 35GB hard disk to give a bit more space just in case.
 ami='ami-XXXXXXXXXXX'
-# instance type - training requires t2.large, but can test with t2.micro as it is free tier
+# instance type - training requires a .large (2x vCPU, 8GB memory), but can test with t2.micro as it is free tier
+# note that t2 are "burstable" and only allow 60% (36 min per hour) of full usage before throttling back to 30%. Use m5.large instead as this doesn't happen & is very similar cost.
 #ins_type='t2.micro'
-ins_type='t2.large'
+ins_type='m5.large'
 
 # AWS CLI method - do not use currently
 ## step 1 - create security group. May not need to do this here and could just do via console
