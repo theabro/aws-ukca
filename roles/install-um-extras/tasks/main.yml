@@ -22,6 +22,9 @@
     - texlive-latex-extra
     - texlive-generic-extra
     - texlive-science
+    - texlive-xetex
+    - texlive-fonts-recommended
+    - texlive-plain-generic
 
 - name: Add mule requirement
   lineinfile:
