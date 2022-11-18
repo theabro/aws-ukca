@@ -1,0 +1,40 @@
+#!/usr/bin/expect -f
+
+#Usage mcs_ssh.expect <username> <password> <ipaddress> <keyname>
+
+set timeout 60
+
+# SSH into user to put required settings into .bashrc and .ssh/config
+spawn ssh [lindex $argv 0]@linux.pwf.cam.ac.uk
+
+expect "yes/no" { 
+	send "yes\r"
+	expect "*?assword:" { send -- "[lindex $argv 1]\r" }
+	} "*?assword:" { send -- "[lindex $argv 1]\r" }
+
+# put the alias in the .bashrc - need to check this actually works
+expect "*$ " { send -- "echo 'alias jopen=\"ssh -N -f -L localhost:4801:localhost:4801 ukca\"' >> ~/.bashrc\r" }
+
+# put the information in the .ssh/config file
+expect "*$ " { send -- "echo '' >> ~/.ssh/config\r" }
+expect "*$ " { send -- "echo 'Host ukca' >> ~/.ssh/config\r" }
+expect "*$ " { send -- "echo '        Hostname '[lindex $argv 2] >> ~/.ssh/config\r" }
+expect "*$ " { send -- "echo '        User ubuntu' >> ~/.ssh/config\r" }
+expect "*$ " { send -- "echo '        IdentityFile ~/.ssh/'[lindex $argv 3] >> ~/.ssh/config\r" }
+expect "*$ " { send -- "echo '        HostKeyAlgorithms ssh-rsa' >> ~/.ssh/config\r" }
+
+# exit the session
+expect "*$ " { send -- "exit\r" }
+
+expect eof
+
+
+# rsync key file into .ssh directory
+spawn rsync -acuvv ../keys/[lindex $argv 3] [lindex $argv 0]@linux.pwf.cam.ac.uk:.ssh/.
+
+expect "yes/no" { 
+	send "yes\r"
+	expect "*?assword:" { send -- "[lindex $argv 1]\r" }
+        } "*?assword:" { send -- "[lindex $argv 1]\r" }
+
+expect eof

@@ -130,7 +130,6 @@ must be made in `group_vars/all.yml` (this is the default). The current roles wi
     fcm checkout fcm:ukca.x_tr@um13.0 UKCAum13.0
     cd UM13.0/
     rose stem --group=install,install_source --source=. --source=fcm:ukca.xm_tr@um13.0 -S CENTRAL_INSTALL=true -S UKCA=true
-    rose stem --group=fcm_make --source=. --source=fcm:ukca.xm_tr@um13.0 -S MAKE_PREBUILDS=true --name=vn13.0_prebuilds
     rose stem --group=fcm_make --source=. --source=fcm:ukca.xm_tr@um13.0 -S MAKE_PREBUILDS=true --name=vn13.0_prebuilds -S LIMIT=8
     rose stem -O offline --group=fcm_make --source=. --source=fcm:ukca.xm_tr@um13.0 -S MAKE_PREBUILDS=true --name=vn13.0_offline_prebuilds -S LIMIT=8
     rose stem --group=kgo,ukca --source=. --source=fcm:ukca.xm_tr@um13.0 -S GENERATE_KGO=true -S LIMIT=8
@@ -190,6 +189,10 @@ where `N` is the number of instances you want to create. This will then create c
 
     zip ukca_key_tr01.zip ukca_key_tr01.pem
 
+This can be done in a loop, e.g.
+
+    for i in `ls ukca_key_tr??.pem`; do j=`basename $i .pem`; echo $j; zip ${j}.zip $i; done
+
 However, the information in the .json files will not include the public IP address information at this time as these won't have been assigned. Once the EC2 instances have all started and are running, you can use the script [get-ec2-ip.sh](src/get-ec2-ip.sh) to return the IP address information, e.g.
 
     bash get-ec2-ip.sh | sort
@@ -201,6 +204,14 @@ However, the information in the .json files will not include the public IP addre
     ukca_vm_tr06,ukca_key_tr06,13.40.48.123
 
 This can then be copied and pasted into an Excel spreadsheet using the [Convert Text to Columns Wizard](https://support.microsoft.com/en-us/office/split-text-into-different-columns-with-the-convert-text-to-columns-wizard-30b14928-5550-41f5-97ca-7a3e9c363ed7).
+
+### Put the information on the MCS Linux machines
+
+The script `mcs_details.sh` will send the information of the running instances to the Linux users. This reads from the file `mcs_logins.csv` (be careful of hidden `<feff>` characters!), which is of the format, e.g.
+
+    [MCS USER],[MCS PASSWORD],ukca_vm_tr01,ukca_key_tr01,[IP ADDRESS]
+
+etc. The bash script uses the expect script `mcs_ssh.expect` to add details to the `.bashrc` and `.ssh/config` of the `[MCS USER]`'s files, and then uses rsync to send the key file to the `.ssh/` directory.
 
 ### EC2 Instance Connect
 
