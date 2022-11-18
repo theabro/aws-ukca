@@ -207,11 +207,11 @@ This can then be copied and pasted into an Excel spreadsheet using the [Convert 
 
 ### Put the information on the MCS Linux machines
 
-The script `mcs_details.sh` will send the information of the running instances to the Linux users. This reads from the file `mcs_logins.csv` (be careful of hidden `<feff>` characters!), which is of the format, e.g.
+The script [mcs_details.sh](src/mcs_details.sh) will send the information of the running instances to the Linux users. This reads from the file `mcs_logins.csv` (be careful of hidden `<feff>` characters!), which is of the format, e.g.
 
     [MCS USER],[MCS PASSWORD],ukca_vm_tr01,ukca_key_tr01,[IP ADDRESS]
 
-etc. The bash script uses the expect script `mcs_ssh.expect` to add details to the `.bashrc` and `.ssh/config` of the `[MCS USER]`'s files, and then uses rsync to send the key file to the `.ssh/` directory.
+etc. The bash script uses the expect script [mcs_ssh.expect](src/mcs_ssh.expect) to add details to the `.bashrc` and `.ssh/config` of the `[MCS USER]`'s files, and then uses rsync to send the key file to the `.ssh/` directory.
 
 ### EC2 Instance Connect
 
