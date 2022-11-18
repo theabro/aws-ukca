@@ -21,9 +21,10 @@ subnet1='subnet-XXXXXXXXXXX'
 ### END OF CLOUDFRONT OPTIONS ###
 
 # AMI id:
-#   Ubuntu 18.04 with metomi-vms and UMvn11.8 installed. UKCA Tutorial suite, 
-#   required documentation/output, & ec2 instance connect included. Version 1.2, 2022-03-02.
-# This now has a 35GB hard disk to give a bit more space just in case.
+#   Ubuntu 18.04 with metomi-vms and UMvn13.0 installed.
+#   UKCA Tutorial suite, required documentation/output & data.
+#   Version 1.0, 2022-11-17.
+# This now has a 50GB hard disk to give a bit more space just in case.
 ami='ami-XXXXXXXXXXX'
 # instance type - training requires a .large (2x vCPU, 8GB memory), but can test with t2.micro as it is free tier
 # note that t2 are "burstable" and only allow 60% (36 min per hour) of full usage before throttling back to 30%. Use m5.large instead as this doesn't happen & is very similar cost.
